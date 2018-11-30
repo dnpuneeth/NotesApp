@@ -1,0 +1,29 @@
+<div class="container note">
+  <div class="lead well cont">
+    <div>
+      <div class="media-body">
+        <h3 class="media-heading"><span style="color:Red"><%= @note.title%></span></h3>
+        <br />
+        <div class="body"> <%= @note.body %></div>
+        <br />
+        <div id="tags-div">
+          <p class="tags-label-show">Tags </p>
+        </div>&nbsp
+        <div id="block_container">
+          <% @note.tags.each do |tag|%>
+            <% if tag == @note.tags.last %>
+              <%= tag %>
+            <% else %>
+              <%= tag%>,
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span style="float:right"><%= link_to 'Delete', note_path(@note.id),
+    class: "btn btn-danger",
+    method: :delete,
+    data: { confirm: 'Are you sure?' }
+  %> </span>
+</div>

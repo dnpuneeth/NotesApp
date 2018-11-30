@@ -1,0 +1,44 @@
+<div class="well">
+ 
+  <h4>Taking notes is an important part of the life of every student. </h4>
+  <li>When you are reading or listening, taking notes helps you concentrate.</li>
+  <li>Notes help you to maintain a permanent record of what you have read or listened to.</li>
+
+</div>
+
+<div class="container">
+  <div class="notes">
+    <% @notes.each do |note| %>
+      <div class="media" data-target="<%= note_path(note) %>">
+        <div class="media-body cont">
+          <h3 class="media-heading"><span style="color:Red"><%= note.title%></span></h3>
+            <div class="time hidden-xs"><%= time_ago_in_words note.created_at%> ago</div>
+            <br />
+            <div class="body"><%= truncate note.body, length: 300 %></div>
+            <br />
+            <div id="tags-div">
+              <p class="tags-label">Tags </p>
+            </div>&nbsp
+            <div id="block_container">
+              <% note.tags.each do |tag|%>
+                <% if tag == note.tags.last %>
+                  <%= tag %>
+                <% else %>
+                  <%= tag%>,
+                <% end %>
+              <% end %>
+            </div>
+            <div class="hidden-xs">
+              <br /><a href="<%= note_path(note) %>" class="btn btn-success btn-xs" %>
+              View note </a>
+            </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @notes.empty?%>
+    <div class="alert alert-info"> Nothing here Yet. Create the First Note.</div>
+  <% end %>
+</div>
+
