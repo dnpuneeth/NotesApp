@@ -1,7 +1,13 @@
 # README
 
 Notes app implemeted using Rails, Ruby, Scss, Bootstrap, coffescript, mongodb. The app faciliates
-the user to create, store, view, delete the notes. It's an renposive app.
+the user to: 
+  1. Create the notes
+  2. Store the notes
+  3. View the notes
+  4. Delete the notes
+  5. Search by tags or title.
+It's a renposive app.
 
 To set mongodb as your batabase:
   1. Generate rails app without active-record
