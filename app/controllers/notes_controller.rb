@@ -6,6 +6,12 @@ class NotesController < ApplicationController
 
   def index
     @notes = Note.order(created_at: :desc).all
+    if params[:note]
+      search_by = params[:note][:search]
+      by_title = @notes.search_by_title(search_by)
+      by_tag = @notes.search_by_tag(search_by)
+      @notes = by_title.empty? ? by_tag : by_title
+    end
   end
 
   def create
