@@ -9,17 +9,12 @@
       </button>
       <a class="navbar-brand" href="<%= root_path%>">Home</a>
     </div>
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <form>
-            <a href="#" class="btn btn-success navbar-btn btn-sm" 
-              data-toggle="modal" data-target="#new-note-modal">Create Note
-            </a>
-          </form>
-        </li>
-      </ul>
+      <div class="nav navbar-nav navbar-right">
+        <%= form_for :note, url: root_path, method: :get do %>
+          <input class="form-control" type="text" name="note[search]", placeholder="Search by tag or title" aria-label="Search">
+        <% end %>
+      </div>
     </div>
   </div>
 </nav>

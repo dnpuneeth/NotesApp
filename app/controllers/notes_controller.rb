@@ -2,9 +2,10 @@
 
 # Notes controller
 class NotesController < ApplicationController
-  before_action :fetch_note, only: %i[show destroy]
+  before_action :fetch_note, only: %i[show edit update destroy]
 
   def index
+    @note = Note.new
     @notes = Note.order(created_at: :desc).all
     if params[:note]
       search_by = params[:note][:search]
@@ -15,7 +16,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    note = note_params
+    note = tag_format note_params
     note[:tags] = params[:note][:tags].split(',')
     note = Note.create(note)
     if note.save
@@ -23,10 +24,23 @@ class NotesController < ApplicationController
     else
       flash[:danger] = 'Failed to create Note.'
     end
-    redirect_to root_path
+    redirect_to note_path(note)
   end
 
   def show; end
+
+  def edit; end
+
+  def update
+    note = tag_format note_params
+    note = @note.update_attributes(note)
+    if note
+      flash[:success] = 'Note updated Successfully.'
+    else
+      flash[:danger] = 'Failed to update Note.'
+    end
+    redirect_to note_path(@note)
+  end
 
   def destroy
     @note.destroy
@@ -42,5 +56,10 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
 
-  private :fetch_note, :note_params
+  def tag_format(prms)
+    prms[:tags] = params[:note][:tags].split(' ')
+    prms
+  end
+
+  private :fetch_note, :note_params, :tag_format
 end

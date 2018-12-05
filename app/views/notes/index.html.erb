@@ -7,9 +7,14 @@
 </div>
 
 <div class="container">
-  <%= form_for :note, url: root_path, method: :get do %>
-    <input class="form-control" type="text" name="note[search]", placeholder="Search by tag or title" aria-label="Search">
-  <% end %><br />
+  <div>
+    <form>
+      <a href="#" class="btn btn-success navbar-btn btn-sm" 
+        data-toggle="modal" data-target="#new-note-modal">Create Note
+      </a>
+    </form>
+  </div>
+  
   <div class="notes">
     <% @notes.each do |note| %>
       <div class="media" data-target="<%= note_path(note) %>">
